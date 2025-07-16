@@ -9,9 +9,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gogobar.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-with app.app_context():
-    db.create_all()
-
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -51,3 +48,9 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
+@app.cli.command("init-db")
+def init_db():
+    """Inizializza il database."""
+    db.create_all()
+    print("Database inizializzato con successo.")

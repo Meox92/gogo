@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>GoGo Bar - Ricette</title>
+</head>
+<body>
+    <h1>Gestione Ricette - GoGo Bar</h1>
+    <form action="/add_recipe" method="POST">
+        <input type="text" name="name" placeholder="Nome ricetta" required>
+        <input type="text" name="category" placeholder="Categoria (es. Primi)" required>
+        <input type="number" step="0.01" name="sale_price" placeholder="Prezzo vendita" required>
+        <button type="submit">Aggiungi Ricetta</button>
+    </form>
+    <ul>
+    {% for r in recipes %}
+        <li>{{ r.name }} - {{ r.category }} - €{{ r.sale_price }}
+            <a href="/archive/{{ r.id }}">[Archivia]</a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
